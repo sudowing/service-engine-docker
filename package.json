@@ -1,6 +1,6 @@
 {
   "name": "service-engine-docker",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Dockerized Service-Engine Service",
   "main": "index.js",
   "scripts": {
