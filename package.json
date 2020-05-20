@@ -1,0 +1,44 @@
+{
+  "name": "service-engine-docker",
+  "version": "0.0.2",
+  "description": "Dockerized Service-Engine Service",
+  "main": "index.js",
+  "scripts": {
+    "start": "npm run build && node lib/index",
+    "watch": "npx nodemon",
+    "build": "npx tsc",
+    "lint": "npm run lint:tslint",
+    "lint:fix": "npm run lint:prettier:fix && npm run lint:tslint:fix",
+    "lint:prettier": "npx prettier -l 'src/**/*.ts'",
+    "lint:prettier:fix": "npx prettier --write 'src/**/*.ts'",
+    "lint:tslint": "npx tslint -p tsconfig.json",
+    "lint:tslint:fix": "npx tslint -p tsconfig.json --fix",
+    "test": "mocha --timeout 25000 --exit -r ts-node/register -- \"src/**/*.spec.ts\"",
+    "test:coverage": "nyc mocha --timeout 25000 --exit -r ts-node/register -- \"src/**/*.spec.ts\"",
+    "api-docs": "docker run -p 8080:8080 -e API_URL='http://0.0.0.0:3001/openapi' swaggerapi/swagger-ui",
+    "make:api-md": "npx widdershins --search true --language_tabs 'javascript:JavaScript' 'javascript--nodejs:Node.JS' 'python:Python' 'go:Go' 'http:HTTP' 'ruby:Ruby' --summary http://0.0.0.0:3001/openapi -o docs/service.md"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sudowing/service-engine-docker.git"
+  },
+  "author": "open-source@joewingard.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sudowing/service-engine-docker/issues"
+  },
+  "homepage": "https://github.com/sudowing/service-engine-docker#readme",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "i": "^0.3.6",
+    "knex": "^0.21.1",
+    "npm": "^6.14.5",
+    "pg": "^8.2.1",
+    "service-engine": "0.0.2",
+    "ts-node": "^8.10.1",
+    "typescript": "^3.9.3"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  }
+}
