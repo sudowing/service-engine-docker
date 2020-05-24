@@ -6,7 +6,7 @@ import * as knexConfig from "../knexfile";
 // const metadata = require("./metadata.json");
 
 const metadata = {
-  "appShortName": "some-app-service",
+  "appShortName": "some-app-servicesss",
   "title": "Some App Service",
   "description": "Basic description of core resources.",
   "termsOfService": "http://website.io/terms/",
@@ -28,12 +28,17 @@ const db = knex(knexConfig);
 const main = async () => {
   await db.migrate.latest();
 
-  const { App, logger } = await ignite({ db, metadata });
+  const { App, logger, apolloServer } = await ignite({ db, metadata });
 
   logger.info("DB Migrations Run 🔧");
 
   App.listen({ port }, () => {
-    logger.info({ port }, "App Started 🔥");
+    logger.info({ port 
+    }, "App Started 🔥");
+
+    logger.info(`Server ready at http://localhost:${port}${apolloServer.graphqlPath}`);
+
+
   });
 };
 
