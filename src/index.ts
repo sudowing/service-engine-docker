@@ -28,15 +28,15 @@ const db = knex(knexConfig);
 const main = async () => {
   await db.migrate.latest();
 
-  const { App, logger, apolloServer } = await ignite({ db, metadata });
+  const { App, apolloServer, logger } = await ignite({ db, metadata });
 
   logger.info("DB Migrations Run 🔧");
 
   App.listen({ port }, () => {
     logger.info({ port 
-    }, "App Started 🔥");
+    }, `🔥 REST Server ready at http://localhost:${port}/openapi`);
 
-    logger.info(`Server ready at http://localhost:${port}${apolloServer.graphqlPath}`);
+    logger.info(`🚀 GraphQL Server ready at http://localhost:${port}${apolloServer.graphqlPath}`);
 
 
   });
