@@ -79,3 +79,33 @@ The process will be to run the command below and to move the generated file `./d
 ```
 npm run make:api-md
 ```
+
+## Run by Docker
+
+### set secrets & metadata
+The app needs some secrets set in .env
+```
+DB_CLIENT=pg
+# DB_HOST should be ip, domain or docker container name
+DB_HOST=ah_db
+DB_DATABASE=postgres
+DB_USER=postgres
+DB_PASSWORD=secret
+DB_MIGRATIONS_TABLE=knex_migrations
+PORT=8081
+PAGINATION_LIMIT=100
+```
+
+### Docker Run
+
+```
+docker run \
+    --rm -it \
+    --network mynetwork \
+    -p 8081:8081 \
+    --name myservice \
+    sudowing/service-engine:develop
+```
+#### Docker Networking Notes:
+DB_HOST should be ip, domain or docker container name. If container name ensure db and this service on same network.
+`--network` docker flag only needed if DB is run by docker as both need to be on same networks. If available outside docker -- you can omit.
