@@ -27,7 +27,8 @@
     "i": "^0.3.6",
     "knex": "^0.21.1",
     "pg": "^8.2.1",
-    "service-engine": "0.0.4"
+    "service-engine": "0.0.4",
+    "widdershins": "^4.0.1"
   },
   "devDependencies": {
     "nodemon": "^2.0.4"
