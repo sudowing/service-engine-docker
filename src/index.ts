@@ -3,26 +3,8 @@ import { ignite } from "service-engine";
 
 import * as knexConfig from "../knexfile";
 
-// const metadata = require("./metadata.json");
-
-const metadata = {
-  "appShortName": "some-app-servicesss",
-  "title": "Some App Service",
-  "description": "Basic description of core resources.",
-  "termsOfService": "http://website.io/terms/",
-  "name": "Joe Wingard",
-  "email": "open-source@joewingard.com",
-  "url": "https://github.com/sudowing/service-engine",
-  "servers": [
-      "http://localhost:3001",
-      "https://alpha.com",
-      "https://bravo.com",
-      "https://charlie.com"
-  ]
-};
-
-const port = process.env.PORT || 3001;
-
+const port = process.env.PORT || 8080;
+const metadata = require("../metadata.json");
 const db = knex(knexConfig);
 
 const main = async () => {
@@ -37,7 +19,6 @@ const main = async () => {
     }, `🔥 REST Server ready at http://localhost:${port}/openapi`);
 
     logger.info(`🚀 GraphQL Server ready at http://localhost:${port}${apolloServer.graphqlPath}`);
-
 
   });
 };
