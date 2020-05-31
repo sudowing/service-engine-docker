@@ -4,7 +4,6 @@
 
 #### This project implements the [`service-engine`](https://www.npmjs.com/package/service-engine) npm package to provide REST & GraphQL interfaces to Databases. Currently it only supports postgres -- but all database engines support by knex will soon be added.
 
-
 ## RUN APP
 
 Set secrets in `.env` and then run application.
