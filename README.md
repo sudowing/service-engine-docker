@@ -28,3 +28,10 @@ npm run make:api-md
 ```
 
 
+insomnia import
+./docs/insomnia.service.json
+
+insomnia.rest
+
+
+https://github.com/Mermade/shins
