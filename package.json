@@ -10,7 +10,14 @@
     "lint:prettier": "npx prettier -l 'src/**/*.js'",
     "lint:prettier:fix": "npx prettier --write 'src/**/*.js'",
     "api-docs": "docker run -p 8080:8080 -e API_URL='http://0.0.0.0:8081/openapi' swaggerapi/swagger-ui",
-    "make:api-md": "npx widdershins --search true --language_tabs 'javascript:JavaScript' 'javascript--nodejs:Node.JS' 'python:Python' 'go:Go' 'http:HTTP' 'ruby:Ruby' --summary http://0.0.0.0:8081/openapi -o docs/service.md"
+    "make:api-md": "npx widdershins --search true --language_tabs 'javascript:JavaScript' 'javascript--nodejs:Node.JS' 'python:Python' 'go:Go' 'http:HTTP' 'ruby:Ruby' --summary http://0.0.0.0:8081/openapi -o docs/service.md",
+    "docker:build": "docker build -t sudowing/service-engine:develop -f .Dockerfile .",
+    "docker:tag-master": "npm run docker:build && docker tag sudowing/service-engine:develop sudowing/service-engine:master",
+    "docker:tag-latest": "npm run docker:build && docker tag sudowing/service-engine:develop sudowing/service-engine:latest",
+    "docker:tag-release": "npm run docker:build && docker tag sudowing/service-engine:develop sudowing/service-engine:some_version_number",
+    "docker:push-master": "npm run docker:tag-master && docker push sudowing/service-engine:master",
+    "docker:push-latest": "npm run docker:tag-master && docker push sudowing/service-engine:latest",
+    "docker:push-release": "npm run docker:tag-master && docker push sudowing/service-engine:some_release_version"
   },
   "repository": {
     "type": "git",
