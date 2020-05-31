@@ -14,5 +14,17 @@ cp env.template .env
 npm run start
 ```
 
-
+http://localhost:8081/openapi
 http://localhost:8081/service-engine-app/graphql/
+
+### OpenAPI UI
+```
+npm run api-docs
+```
+
+### Run Waddershins Markdown
+```
+npm run make:api-md
+```
+
+
