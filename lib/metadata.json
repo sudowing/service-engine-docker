@@ -1,0 +1,16 @@
+{
+    "appShortName": "sample-app-name",
+    "title": "Sample App Name",
+    "description": "Basic description of service resources.",
+    "termsOfService": "http://website/terms/",
+    "name": "Joe Wingard",
+    "email": "open-source@joewingard.com",
+    "url": "https://github.com/sudowing/service-engine",
+    "servers": [
+        "http://localhost:8081",
+        "https://alpha.com",
+        "https://bravo.com",
+        "https://delta.com"
+    ]
+  
+}

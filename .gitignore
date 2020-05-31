@@ -3,15 +3,8 @@ logs
 *.log
 npm-debug.log*
 
-# data directory for local postgres instance
-data/db
-
-# Coverage directory used by tools like istanbul & js-docs
 # docs
-
-# nyc test coverage
-.nyc_output
-
+docs/*.md
 
 # Dependency directories
 node_modules/
@@ -25,9 +18,4 @@ node_modules/
 # Output of 'npm pack'
 *.tgz
 
-# generated JS
-lib
-
 .DS_Store
-
-tsconfig.tsbuildinfo
