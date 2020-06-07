@@ -1,0 +1,6 @@
+remove port consideration -- people can change our default at runtime
+
+standardize db secrets for multiple db flavors
+
+pass in param for custom datatypes in the db (error over strings)
+
