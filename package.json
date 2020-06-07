@@ -33,6 +33,7 @@
     "dotenv": "^8.2.0",
     "knex": "^0.21.1",
     "pg": "^8.2.1",
+    "service-engine": "0.0.5",
     "sqlite3": "^4.2.0",
     "widdershins": "^4.0.1"
   },
