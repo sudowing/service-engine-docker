@@ -23,6 +23,11 @@ if (process.env.DB_SOCKETPATH) {
   delete dbConfig.connection.host;
 }
 
+if (process.env.DB_FILENAME) {
+  dbConfig.connection = { filename: process.env.DB_FILENAME };
+  dbConfig.useNullAsDefault = true;
+}
+
 const withPoolSupport = ['pg', 'mysql']
 if (withPoolSupport.includes(dbConfig.client)) {
   dbConfig.pool = {
@@ -30,5 +35,6 @@ if (withPoolSupport.includes(dbConfig.client)) {
     max: process.env.DB_POOL_MAX ? Number(process.env.DB_POOL_MAX) : 10,
   };
 }
+
 
 module.exports = dbConfig;

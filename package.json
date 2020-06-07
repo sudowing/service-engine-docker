@@ -9,7 +9,7 @@
     "lint:fix": "npm run lint:prettier:fix",
     "lint:prettier": "npx prettier -l 'src/**/*.js'",
     "lint:prettier:fix": "npx prettier --write 'src/**/*.js'",
-    "api-docs": "docker run -p 8080:8080 -e API_URL='http://0.0.0.0:8080/openapi' swaggerapi/swagger-ui",
+    "api-docs": "docker run -p 8088:8080 -e API_URL='http://0.0.0.0:8080/openapi' swaggerapi/swagger-ui",
     "make:api-md": "npx widdershins --search true --language_tabs 'javascript:JavaScript' 'javascript--nodejs:Node.JS' 'python:Python' 'go:Go' 'http:HTTP' 'ruby:Ruby' --summary http://0.0.0.0:8081/openapi -o docs/service.md",
     "docker:build": "docker build -t sudowing/service-engine:develop -f .Dockerfile .",
     "docker:tag-master": "npm run docker:build && docker tag sudowing/service-engine:develop sudowing/service-engine:master",
@@ -33,6 +33,7 @@
     "dotenv": "^8.2.0",
     "knex": "^0.21.1",
     "pg": "^8.2.1",
+    "sqlite3": "^4.2.0",
     "widdershins": "^4.0.1"
   },
   "devDependencies": {

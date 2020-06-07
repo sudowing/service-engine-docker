@@ -12,7 +12,7 @@ Set secrets in `.env` and then run application.
 npm run start
 ```
 
-The service should now be available (with defined port):
+The service should now be available:
  - http://localhost:8080/openapi
  - http://localhost:8080/service-engine-app/graphql/
 
@@ -20,6 +20,8 @@ The service should now be available (with defined port):
 ```
 npm run api-docs
 ```
+The openapi GUI should now be available:
+ - http://localhost:8088/
 
 ## Migrations
 Knex is used for migration management by `service-engine`. Instead of exposing all the knex migration interfaces (since this project will soon be baked into a general docker container) migrations are added by placing new migration files into the `migrations` directory.
