@@ -7,7 +7,7 @@
     "email": "open-source@joewingard.com",
     "url": "https://github.com/sudowing/service-engine",
     "servers": [
-        "http://localhost:3001",
+        "http://localhost:8080",
         "https://alpha.com",
         "https://bravo.com",
         "https://charlie.com"

@@ -13,8 +13,8 @@ npm run start
 ```
 
 The service should now be available (with defined port):
- - http://localhost:8081/openapi
- - http://localhost:8081/service-engine-app/graphql/
+ - http://localhost:8080/openapi
+ - http://localhost:8080/service-engine-app/graphql/
 
 ## OpenAPI UI
 ```
@@ -86,13 +86,15 @@ npm run make:api-md
 The app needs some secrets set in .env
 ```
 DB_CLIENT=pg
-# DB_HOST should be ip, domain or docker container name
-DB_HOST=ah_db
-DB_DATABASE=postgres
+DB_HOST=localhost
 DB_USER=postgres
 DB_PASSWORD=secret
+DB_DATABASE=postgres
+DB_FILENAME="/path/to/db.sqlite"
+# DB_SOCKETPATH="/path/to/socket.sock"
+DB_POOL_MIN=3
+DB_POOL_MAX=9
 DB_MIGRATIONS_TABLE=knex_migrations
-PORT=8081
 PAGINATION_LIMIT=100
 ```
 
@@ -102,7 +104,7 @@ PAGINATION_LIMIT=100
 docker run \
     --rm -it \
     --network mynetwork \
-    -p 8081:8081 \
+    -p 8080:8080 \
     --name myservice \
     sudowing/service-engine:develop
 ```
