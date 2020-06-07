@@ -1,18 +1,34 @@
 require('dotenv').config();
- 
-module.exports = {
-  client: process.env.DB_CLIENT,
+
+const migrations = {
+  tableName: process.env.DB_MIGRATIONS_TABLE || 'migrations',
+  stub: 'migrations/knex.stub.template',
+}
+
+const DEFAULT_VALUE = 'ENVIRONMENTAL VARIABLE NOT SET'
+
+const dbConfig = {
+  client: process.env.DB_CLIENT || DEFAULT_VALUE,
   connection: {
-    database: process.env.DB_DATABASE,
-    user: process.env.DB_USER,
-    password: process.env.DB_PASSWORD,
+    host: process.env.DB_HOST || DEFAULT_VALUE,
+    database: process.env.DB_DATABASE || DEFAULT_VALUE,
+    user: process.env.DB_USER || DEFAULT_VALUE,
+    password: process.env.DB_PASSWORD || DEFAULT_VALUE,
   },
-  pool: {
-    min: 2,
-    max: 10
-  },
-  migrations: {
-    tableName: process.env.DB_MIGRATIONS_TABLE || 'migrations',
-    stub: 'migrations/knex.stub.template',
-  }
-};
+  migrations
+}
+
+if (process.env.DB_SOCKETPATH) {
+  dbConfig.connection.socketPath = process.env.DB_SOCKETPATH;
+  delete dbConfig.connection.host;
+}
+
+const withPoolSupport = ['pg', 'mysql']
+if (withPoolSupport.includes(dbConfig.client)) {
+  dbConfig.pool = {
+    min: process.env.DB_POOL_MIN ? Number(process.env.DB_POOL_MIN) : 2,
+    max: process.env.DB_POOL_MAX ? Number(process.env.DB_POOL_MAX) : 10,
+  };
+}
+
+module.exports = dbConfig;
