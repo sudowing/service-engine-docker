@@ -14,10 +14,10 @@
     "docker:build": "docker build -t sudowing/service-engine:develop -f .Dockerfile .",
     "docker:tag-master": "npm run docker:build && docker tag sudowing/service-engine:develop sudowing/service-engine:master",
     "docker:tag-latest": "npm run docker:build && docker tag sudowing/service-engine:develop sudowing/service-engine:latest",
-    "docker:tag-release": "npm run docker:build && docker tag sudowing/service-engine:develop sudowing/service-engine:v0.0.3",
+    "docker:tag-release": "npm run docker:build && docker tag sudowing/service-engine:develop sudowing/service-engine:v0.0.4",
     "docker:push-master": "npm run docker:tag-master && docker push sudowing/service-engine:master",
     "docker:push-latest": "npm run docker:tag-latest && docker push sudowing/service-engine:latest",
-    "docker:push-release": "npm run docker:tag-release && docker push sudowing/service-engine:v0.0.3"
+    "docker:push-release": "npm run docker:tag-release && docker push sudowing/service-engine:v0.0.4"
   },
   "repository": {
     "type": "git",
