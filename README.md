@@ -98,6 +98,7 @@ DB_POOL_MIN=3
 DB_POOL_MAX=9
 DB_MIGRATIONS_TABLE=knex_migrations
 PAGINATION_LIMIT=100
+#MIGRATIONS=false // true by default
 ```
 
 ### Docker Run
