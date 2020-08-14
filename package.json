@@ -15,11 +15,11 @@
     "docker:tag-develop": "npm run docker:build && docker tag sudowing/service-engine:develop sudowing/service-engine:develop",
     "docker:tag-master": "npm run docker:build && docker tag sudowing/service-engine:develop sudowing/service-engine:master",
     "docker:tag-latest": "npm run docker:build && docker tag sudowing/service-engine:develop sudowing/service-engine:latest",
-    "docker:tag-release": "npm run docker:build && docker tag sudowing/service-engine:develop sudowing/service-engine:v0.0.6",
+    "docker:tag-release": "npm run docker:build && docker tag sudowing/service-engine:develop sudowing/service-engine:v0.0.7",
     "docker:push-develop": "npm run docker:tag-develop && docker push sudowing/service-engine:develop",
     "docker:push-master": "npm run docker:tag-master && docker push sudowing/service-engine:master",
     "docker:push-latest": "npm run docker:tag-latest && docker push sudowing/service-engine:latest",
-    "docker:push-release": "npm run docker:tag-release && docker push sudowing/service-engine:v0.0.6"
+    "docker:push-release": "npm run docker:tag-release && docker push sudowing/service-engine:v0.0.7"
   },
   "repository": {
     "type": "git",
