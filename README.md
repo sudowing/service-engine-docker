@@ -1,8 +1,9 @@
-# service-engine-docker
+# Service Engine: Node Implemention and Docker Base Image
 
-#### Dockerized Service-Engine Service.
 
-#### This project implements the [`service-engine`](https://www.npmjs.com/package/service-engine) npm package to provide REST & GraphQL interfaces to Databases. Currently it only supports postgres -- but all database engines support by knex will soon be added.
+#### This project implements the [**service-engine**](https://www.npmjs.com/package/service-engine) npm package to provide `REST`, `GraphQL`, & `gRPC` services.
+
+Currently it only supports postgres, mysql and sqlite3.
 
 ## RUN APP
 
