@@ -114,3 +114,12 @@ docker run \
 #### Docker Networking Notes:
 DB_HOST should be ip, domain or docker container name. If container name ensure db and this service on same network.
 `--network` docker flag only needed if DB is run by docker as both need to be on same networks. If available outside docker -- you can omit.
+
+
+insomnia
+
+waddershins / openapi
+
+.env
+
+demo projects
