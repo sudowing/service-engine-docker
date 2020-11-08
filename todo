@@ -1,5 +1,0 @@
-remove port consideration -- people can change our default at runtime
-
-standardize db secrets for multiple db flavors
-
-
