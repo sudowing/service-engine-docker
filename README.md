@@ -106,11 +106,17 @@ PAGINATION_LIMIT=100
 
 ```
 docker run \
-    --rm -it \
-    --network mynetwork \
-    -p 8080:8080 \
-    --name myservice \
-    sudowing/service-engine:develop
+	--rm -it \
+	--env-file ./.env \
+	-v $(pwd)/metadata.json:/app/lib/metadata.json \
+	-v $(pwd)/middleware.js:/app/lib/middleware.js \
+	-v $(pwd)/migrations:/app/migrations \
+	--network mynetwork \
+	-p 8080:8080 \
+	-p 50012:50012 \
+	--name myservice \
+	sudowing/service-engine:develop
+
 ```
 #### Docker Networking Notes:
 DB_HOST should be ip, domain or docker container name. If container name ensure db and this service on same network.
