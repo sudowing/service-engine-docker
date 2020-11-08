@@ -36,7 +36,7 @@
     "knex": "^0.21.1",
     "mysql2": "^2.2.5",
     "pg": "^8.2.1",
-    "service-engine": "0.0.10",
+    "service-engine": "^1.0.0",
     "sqlite3": "^4.2.0",
     "widdershins": "^4.0.1"
   },
