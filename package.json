@@ -1,6 +1,6 @@
 {
   "name": "service-engine-docker",
-  "version": "0.0.7",
+  "version": "1.0.0",
   "description": "General Service Engine: REST, GraphQL & gRPC",
   "main": "lib/index.js",
   "scripts": {
