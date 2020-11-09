@@ -131,7 +131,7 @@ docker push sudowing/service-engine:v0.0.0
 
 # <a id="versioning"></a>Versioning
 
-[SemVer](http://semver.org/) is used for versioning. For the versions available, see the [tags on this repository](https://github.com/sudowing/service-engine/tags). 
+[SemVer](http://semver.org/) is used for versioning. For the versions available, see the [tags on this repository](https://github.com/sudowing/service-engine-docker/tags). 
 
 # <a id="license"></a>License
 
