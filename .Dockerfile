@@ -1,12 +1,10 @@
-FROM node:12
+FROM node:12-alpine3.12
 
-ENV HOME=/home/service-engine
+ENV HOME=/app
 ENV NODE_ENV=production
 
-RUN useradd --user-group --create-home service-engine
 
-USER $APP_USER
-WORKDIR $HOME/app
+WORKDIR /app
 
 RUN cd $WORKDIR
 
