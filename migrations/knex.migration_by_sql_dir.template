@@ -1,0 +1,7 @@
+const {gatherContentByID, process_sql} = require('./helpers/utils');
+
+const id = __filename.replace(__dirname, '').split('_')[1]
+const {up, down} = gatherContentByID(__dirname, id);
+
+exports.up = process_sql(up);
+exports.down = process_sql(down);

@@ -85,6 +85,13 @@ Migration Usage follows this workflow:
 - add the migration steps to the `exports.up` & `exports.down` functions (exactly as you would with knex).
 - Migrations get executed on server start
 
+
+
+saasd
+```js
+npm run migrate:new atlanta braves
+```
+
 # <a id="static_html"></a>Static HTML Documentation
 
 This project includes support for generating the markdown consumed by [Shin Docs](https://github.com/Mermade/shins) needed to produce static html documents. If you haven't seen that project before, it's worth a look.

@@ -9,6 +9,7 @@
     "lint:fix": "npm run lint:prettier:fix",
     "lint:prettier": "npx prettier -l 'src/**/*.js'",
     "lint:prettier:fix": "npx prettier --write 'src/**/*.js'",
+    "migrate:new": "node lib/create_schema_migration_script",
     "api-docs": "docker run -p 8088:8080 -e API_URL='http://0.0.0.0:8080/openapi' swaggerapi/swagger-ui",
     "make:api-md": "npx widdershins --search true --language_tabs 'javascript:JavaScript' 'javascript--nodejs:Node.JS' 'python:Python' 'go:Go' 'http:HTTP' 'ruby:Ruby' --summary http://0.0.0.0:8080/openapi -o docs/service.md",
     "docker:build": "docker build -t sudowing/service-engine:develop -f .Dockerfile ."
