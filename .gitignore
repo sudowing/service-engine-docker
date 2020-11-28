@@ -21,11 +21,3 @@ node_modules/
 .DS_Store
 
 schema.error.*
-
-# migrations
-# migrations/sql
-# !migrations/sql/.keep
-# migrations/template
-# migrations/*.js
-
-
