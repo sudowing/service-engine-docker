@@ -21,3 +21,8 @@ node_modules/
 .DS_Store
 
 schema.error.*
+
+# migrations
+lib/migrations/sql
+lib/migrations/*.js
+

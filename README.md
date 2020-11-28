@@ -94,6 +94,18 @@ I do not love wrapping my SQL inside JS template strings -- just so they can be 
 npm run migrate:new atlanta braves
 ```
 
+DEFINE THE ENV VARS
+
+```
+npm run migrate:make xxx_yyy_zzz
+npm run migrate:latest
+npm run migrate:rollback
+npm run migrate:up
+npm run migrate:down
+npm run migrate:list
+```
+
+
 The way this works is that a serialized integer is added as a prefix the the migration scripe `name`, and a directory that corresponds with that serial number is created to hold up/down migration SQL scripts. The contents of the up/down directories are executed in the order they are naturally sorted (meaning you can control this order by implementing `int` prefixes).
 
 Schema migration scripts generated with this method utilize a generic migration stub -- which execute the contents of any SQL found in up/down directories (getting the relevant ID from the filename).
