@@ -1,4 +1,4 @@
-const {gatherContentByID, process_sql} = require('./helpers/utils');
+const {gatherContentByID, process_sql} = require('../migration_utils');
 
 const id = __filename.replace(__dirname, '').split('_')[1]
 const {up, down} = gatherContentByID(__dirname, id);
