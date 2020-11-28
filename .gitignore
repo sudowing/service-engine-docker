@@ -23,6 +23,7 @@ node_modules/
 schema.error.*
 
 # migrations
-lib/migrations/sql
-lib/migrations/*.js
+migrations/sql
+migrations/template
+migrations/*.js
 

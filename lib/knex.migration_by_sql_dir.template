@@ -1,7 +1,3 @@
-const {gatherContentByID, process_sql} = require('../migration_utils');
-
-const id = __filename.replace(__dirname, '').split('_')[1]
-const {up, down} = gatherContentByID(__dirname, id);
-
-exports.up = process_sql(up);
-exports.down = process_sql(down);
+const migrate = require('service-engine').modularMigration(__dirname, __filename);
+exports.up = migrate.up;
+exports.down = migrate.down;
