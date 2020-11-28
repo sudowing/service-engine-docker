@@ -80,17 +80,23 @@ Knex is used for migration management by `service-engine`.
 
 Instead of exposing all the knex migration interfaces (since this project is also baked into a general docker container) migrations are added by placing new migration files into the `migrations` directory.
 
+## Basic Schema Migrations
 Migration Usage follows this workflow:
 - copy/paste `migrations/knex.stub.template` to `migrations/YYYYMMDDHHMMSS_some_migration_name.js` 
 - add the migration steps to the `exports.up` & `exports.down` functions (exactly as you would with knex).
 - Migrations get executed on server start
 
+## Better Schema Migrations
 
+I do not love wrapping my SQL inside JS template strings -- just so they can be executed with knex. I much prefer to commit the `SQL` directly. To support this bias, I've included support for a simple system that creates modular directories that correspond with a given migration script.
 
-saasd
 ```js
 npm run migrate:new atlanta braves
 ```
+
+The way this works is that a serialized integer is added as a prefix the the migration scripe `name`, and a directory that corresponds with that serial number is created to hold up/down migration SQL scripts. The contents of the up/down directories are executed in the order they are naturally sorted (meaning you can control this order by implementing `int` prefixes).
+
+Schema migration scripts generated with this method utilize a generic migration stub -- which execute the contents of any SQL found in up/down directories (getting the relevant ID from the filename).
 
 # <a id="static_html"></a>Static HTML Documentation
 
