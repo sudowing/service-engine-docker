@@ -52,10 +52,8 @@ The service should now be available:
  - http://localhost:8080/service-engine-app/graphql/
 
 ##### **NOTES:**
-- **GraphQL Playground:** To access the Web UI, 
-
-the NODE_ENV=production  
-- **Networking:** DB_HOST should be ip, domain or docker container name. If container name ensure db and this service on same network.
+- **GraphQL Playground:** To access the Web UI, set `NODE_ENV=production`.
+- **Networking:** `DB_HOST` should be ip, domain or docker container name. If container name ensure db and this service on same network.
 `--network` docker flag only needed if DB is run by docker as both need to be on same networks. If available outside docker -- you can omit.
 
 
@@ -63,7 +61,7 @@ the NODE_ENV=production
 
 Set secrets in `.env` and then run application.
 
-```
+```sh
 npm run start
 ```
 
@@ -72,7 +70,8 @@ The service should now be available:
  - http://localhost:8080/service-engine-app/graphql/
 
 # <a id="open_api_ui"></a>OpenAPI UI
-```
+```sh
+# launch the openapi ui via a docker container
 npm run api-docs
 ```
 
@@ -194,6 +193,7 @@ The two `NPM` commands above will generate the files diagrammed with the tree be
 
 ## <a id="schema_migrations-styleguide"></a>SQL Style Guide
 
+A SQL styleguide is included within the migrations directory. It is a simple markdown file, which you should modify to fit your needs. I forked the guide from [GitLab Handbook](https://about.gitlab.com/handbook/business-ops/data-team/platform/sql-style-guide/) which is a fantastic resources for organizational standards.
 
 # <a id="static_html"></a>Static HTML Documentation
 
@@ -230,7 +230,6 @@ docker push sudowing/service-engine:latest
 docker tag sudowing/service-engine:develop sudowing/service-engine:v0.0.0
 docker push sudowing/service-engine:v0.0.0
 ```
-
 
 # <a id="versioning"></a>Versioning
 
