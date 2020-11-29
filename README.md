@@ -11,7 +11,11 @@ Currently it only supports postgres, mysql and sqlite3. Support is planned for t
 * [Run via Node](#run_via_node)
 * [OpenAPI UI](#open_api_ui)
 * [API Documentation](#api_documentation)
-* [Migrations](#migrations)
+* [Schema Migrations](#schema_migrations)
+	* [Basic Schema Migrations](#schema_migrations-basic)
+	* [Disable Migrations on Startup](#schema_migrations-disable-on-startup)
+	* [Modular Schema Migration Scripts](#schema_migrations-modular)
+	* [SQL Style Guide](#schema_migrations-styleguide)
 * [Static HTML Documentation](#static_html)
     * [Generate shin markdown](#generate_shin)
     * [Disable Migrations](#disable_migrations)
@@ -23,15 +27,20 @@ Currently it only supports postgres, mysql and sqlite3. Support is planned for t
 
 set secrets & metadata
 
-```
+```sh
+# create docker network (if db on docker network)
+docker network create mynetwork
+
+# run app via docker, optionally mounting custom files
 docker run \
 	--rm -it \
-	--env-file ./env \
-	-v $(pwd)/lib/metadata.json:/app/lib/metadata.json \
-	-v $(pwd)/lib/metadata.json:/app/lib/metadata.json \    
 	-v $(pwd)/lib/complex_resources.js:/app/lib/complex_resources.js \
-	-v $(pwd)/lib/migrations:/app/migrations \
+	-v $(pwd)/lib/metadata.json:/app/lib/metadata.json \
+	-v $(pwd)/lib/middleware.json:/app/lib/middleware.json \    
+	-v $(pwd)/lib/permissions.json:/app/lib/permissions.json \    
+	-v $(pwd)/migrations:/app/migrations \
 	--network mynetwork \
+	--env-file ./env \
 	-p 8080:8080 \
 	-p 50012:50012 \
 	--name myservice \
@@ -42,8 +51,9 @@ The service should now be available:
  - http://localhost:8080/openapi
  - http://localhost:8080/service-engine-app/graphql/
 
-##### Docker Networking Notes:
-DB_HOST should be ip, domain or docker container name. If container name ensure db and this service on same network.
+##### **NOTES:**
+- **GraphQL Playground:** To access the Web UI, set `NODE_ENV=production`.
+- **Networking:** `DB_HOST` should be ip, domain or docker container name. If container name ensure db and this service on same network.
 `--network` docker flag only needed if DB is run by docker as both need to be on same networks. If available outside docker -- you can omit.
 
 
@@ -51,7 +61,7 @@ DB_HOST should be ip, domain or docker container name. If container name ensure 
 
 Set secrets in `.env` and then run application.
 
-```
+```sh
 npm run start
 ```
 
@@ -60,7 +70,8 @@ The service should now be available:
  - http://localhost:8080/service-engine-app/graphql/
 
 # <a id="open_api_ui"></a>OpenAPI UI
-```
+```sh
+# launch the openapi ui via a docker container
 npm run api-docs
 ```
 
@@ -73,34 +84,47 @@ I use the [Insomnia API Client](https://insomnia.rest) for develoment, and I've 
 
 The service has a two sets of resources -- some static development resources to the framework (ping, openapi, etc) and others that are generated dynamically that are specific to the database. I've prebuilt an Insomnia collection that describes the development resource calls, which you can import [docs/insomnia.service.json](./docs/insomnia.service.json)
 
-##### **NOTE 1:** I like Postman but use Insomniafor it's better GraphQL support
 
-# <a id="migrations"></a>Migrations
+Insomnia also has a feature that builds out REST calls based on an OpenAPI Specification -- which is great because the application automatically generates one based upon the database powering it.
+
+Below is the default `/openapi` URL:
+```
+http://localhost:8080/openapi
+```
+
+##### **NOTE 1:** I like Postman but use Insomnia for it's better GraphQL support
+
+# <a id="schema_migrations"></a>Schema Migrations
 Knex is used for migration management by `service-engine`.
 
-Instead of exposing all the knex migration interfaces (since this project is also baked into a general docker container) migrations are added by placing new migration files into the `migrations` directory.
+## <a id="schema_migrations-basic"></a>Basic Schema Migrations
 
-Migration Usage follows this workflow:
-- copy/paste `migrations/knex.stub.template` to `migrations/YYYYMMDDHHMMSS_some_migration_name.js` 
-- add the migration steps to the `exports.up` & `exports.down` functions (exactly as you would with knex).
-- Migrations get executed on server start
+All migration functionality provided by [knex.js](http://knexjs.org/) is supported. However, because the knexfile is not in the default location, `NPM` scripts have been added to simplify usage.
 
-# <a id="static_html"></a>Static HTML Documentation
+```sh
+# create new knex migration script
+npm run migrate:make some_script_name
 
-This project includes support for generating the markdown consumed by [Shin Docs](https://github.com/Mermade/shins) needed to produce static html documents. If you haven't seen that project before, it's worth a look.
+# run all pending migration scripts
+npm run migrate:latest
 
-## <a id="generate_shin"></a>Generate shin markdown
+# rollback all migration scripts committing in last batch
+npm run migrate:rollback
 
+# rollback all migration scripts
+npm run migrate:rollback-all
+
+# run next pending migration script
+npm run migrate:up
+
+# uncommit last committed migration script
+npm run migrate:down
+
+# list all migration script along with commitment status
+npm run migrate:list
 ```
-npm run make:api-md
-```
 
-The `npm` cmd above will generate the api [documentation in markdown](./docs/service.md).
-
-You can take this output and use it to produce fantastic static HTML docs with [Mermade/shins](https://github.com/Mermade/shins). I always use the `--inline` flag.
-
-
-## <a id="disable_migrations"></a>Disable Migrations
+## <a id="schema_migrations-disable-on-startup"></a>Disable Migrations on Startup
 
 To disable migrations, which run by default when the server starts, you can simply disable it via an `ENV VAR`.
 
@@ -108,10 +132,89 @@ To disable migrations, which run by default when the server starts, you can simp
 MIGRATIONS=false
 ```
 
+## <a id="schema_migrations-modular"></a>Modular Schema Migration Scripts
+
+Instead of wrapping SQL inside JS template strings within the up/down functions for knex, I prefer to commit the `SQL` directly. To support this bias, I've included support for a simple system that creates modular directories that correspond with a given migration script.
+
+The best way to explain how the system works is with an example. 
+
+
+### Create New Migration Scripts
+```sh
+# create new migration scripts via custom functionality
+npm run migrate:new atlanta braves
+npm run migrate:new philadelphia phillies
+```
+
+### Migration Directory Contents
+
+The two `NPM` commands above will generate the files diagrammed with the tree below. Descriptions for key directories follow the diagram.
+```
+.
+├── 20201129005348_0001_atlanta_braves.js
+├── 20201129005518_0002_philadelphia_phillies.js
+├── sql
+│   ├── 0001
+│   │   ├── down
+│   │   │   ├── 01_drop_another_table.sql
+│   │   │   └── 02_drop_some_table.sql
+│   │   └── up
+│   │       ├── 01_create_some_table.sql
+│   │       └── 02_create_another_table.sql
+│   └── 0002
+│       ├── down
+│       │   ├── 01_drop_another_table.sql
+│       │   └── 02_drop_some_table.sql
+│       └── up
+│           ├── 01_create_some_table.sql
+│           └── 02_create_another_table.sql
+└── template
+    ├── down
+    │   ├── 01_drop_another_table.sql
+    │   └── 02_drop_some_table.sql
+    └── up
+        ├── 01_create_some_table.sql
+        └── 02_create_another_table.sql
+
+10 directories, 14 files
+```
+
+- #### **file:** `201129005518_0002_philadelphia_phillies.js`
+	This is the js file used by knex to execute the schema migration. The *integer* following the timestamp prefix within the filename corresponds with a directory use to hold batches of `SQL` files that makeup the migration.
+
+- #### **directory:** `sql/0002/up`
+	This directory will hold the batch of `SQL` files that will be applied with the migration is rolled forward. They will be executed in the order they get sorted in, so it is recommended to use integer prefixes.
+
+- #### **directory:** `sql/0002/down`
+	This directory will hold the batch of `SQL` files that will be applied with the migration is rolled backwards. They will be executed in the order they get sorted in, so it is recommended to use integer prefixes.
+
+- #### **directory:** `template`
+	This directory is used as the basis for creating `sql/{id}` directories. Anything present in these directories will get cloned when using the `npm run migrate:new` command.
+
+## <a id="schema_migrations-styleguide"></a>SQL Style Guide
+
+A SQL styleguide is included within the migrations directory. It is a simple markdown file, which you should modify to fit your needs. I forked the guide from [GitLab Handbook](https://about.gitlab.com/handbook/business-ops/data-team/platform/sql-style-guide/) which is a fantastic resources for organizational standards.
+
+# <a id="static_html"></a>Static HTML Documentation
+
+This project includes support for generating the markdown consumed by [Shin Docs](https://github.com/Mermade/shins) needed to produce static html documents. If you haven't seen that project before, it's worth a look.
+
+## <a id="generate_shin"></a>Generate shin markdown
+
+```sh
+npm run make:api-md
+```
+
+The `npm` cmd above will generate the api [documentation in markdown](./docs/service.md).
+
+You can take this output and use it to produce fantastic static HTML docs with [Mermade/shins](https://github.com/Mermade/shins).
+
+##### note: I always use the `--inline` flag when generating the shin docs.
+
 # <a id="docker_image"></a>Docker Image Publishing
 
 The steps below are not unique to this project -- but I often have to lookup the steps -- so I'll document them here for convenience.
-```
+```sh
 # build docker container
 docker build -t sudowing/service-engine:develop -f .Dockerfile .
 
@@ -127,7 +230,6 @@ docker push sudowing/service-engine:latest
 docker tag sudowing/service-engine:develop sudowing/service-engine:v0.0.0
 docker push sudowing/service-engine:v0.0.0
 ```
-
 
 # <a id="versioning"></a>Versioning
 

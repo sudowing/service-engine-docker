@@ -1,0 +1,3 @@
+const migrate = require('service-engine').modularMigration(__dirname, __filename);
+exports.up = migrate.up;
+exports.down = migrate.down;
