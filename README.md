@@ -11,7 +11,11 @@ Currently it only supports postgres, mysql and sqlite3. Support is planned for t
 * [Run via Node](#run_via_node)
 * [OpenAPI UI](#open_api_ui)
 * [API Documentation](#api_documentation)
-* [Schema Migrations](#schema-migrations)
+* [Schema Migrations](#schema_migrations)
+	* [Basic Schema Migrations](#schema_migrations-basic)
+	* [Disable Migrations on Startup](#schema_migrations-disable-on-startup)
+	* [Modular Schema Migration Scripts](#schema_migrations-modular)
+	* [SQL Style Guide](#schema_migrations-styleguide)
 * [Static HTML Documentation](#static_html)
     * [Generate shin markdown](#generate_shin)
     * [Disable Migrations](#disable_migrations)
@@ -47,11 +51,11 @@ The service should now be available:
  - http://localhost:8080/openapi
  - http://localhost:8080/service-engine-app/graphql/
 
-##### Notes:
-**GraphQL Playground:** To access the Web UI, 
+##### **NOTES:**
+- **GraphQL Playground:** To access the Web UI, 
 
 the NODE_ENV=production  
-**Networking:** DB_HOST should be ip, domain or docker container name. If container name ensure db and this service on same network.
+- **Networking:** DB_HOST should be ip, domain or docker container name. If container name ensure db and this service on same network.
 `--network` docker flag only needed if DB is run by docker as both need to be on same networks. If available outside docker -- you can omit.
 
 
@@ -91,10 +95,10 @@ http://localhost:8080/openapi
 
 ##### **NOTE 1:** I like Postman but use Insomnia for it's better GraphQL support
 
-# <a id="schema-migrations"></a>Schema Migrations
+# <a id="schema_migrations"></a>Schema Migrations
 Knex is used for migration management by `service-engine`.
 
-## Basic Schema Migrations
+## <a id="schema_migrations-basic"></a>Basic Schema Migrations
 
 All migration functionality provided by [knex.js](http://knexjs.org/) is supported. However, because the knexfile is not in the default location, `NPM` scripts have been added to simplify usage.
 
@@ -121,7 +125,7 @@ npm run migrate:down
 npm run migrate:list
 ```
 
-## <a id="disable_migrations"></a>Disable Migrations
+## <a id="schema_migrations-disable-on-startup"></a>Disable Migrations on Startup
 
 To disable migrations, which run by default when the server starts, you can simply disable it via an `ENV VAR`.
 
@@ -129,7 +133,7 @@ To disable migrations, which run by default when the server starts, you can simp
 MIGRATIONS=false
 ```
 
-## Better Schema Migrations
+## <a id="schema_migrations-modular"></a>Modular Schema Migration Scripts
 
 Instead of wrapping SQL inside JS template strings within the up/down functions for knex, I prefer to commit the `SQL` directly. To support this bias, I've included support for a simple system that creates modular directories that correspond with a given migration script.
 
@@ -187,6 +191,9 @@ The two `NPM` commands above will generate the files diagrammed with the tree be
 
 - #### **directory:** `template`
 	This directory is used as the basis for creating `sql/{id}` directories. Anything present in these directories will get cloned when using the `npm run migrate:new` command.
+
+## <a id="schema_migrations-styleguide"></a>SQL Style Guide
+
 
 # <a id="static_html"></a>Static HTML Documentation
 
