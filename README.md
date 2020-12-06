@@ -34,10 +34,11 @@ docker network create mynetwork
 # run app via docker, optionally mounting custom files
 docker run \
 	--rm -it \
-	-v $(pwd)/lib/complex_resources.js:/app/lib/complex_resources.js \
 	-v $(pwd)/lib/metadata.json:/app/lib/metadata.json \
-	-v $(pwd)/lib/middleware.json:/app/lib/middleware.json \    
-	-v $(pwd)/lib/permissions.json:/app/lib/permissions.json \    
+	-v $(pwd)/lib/middleware.json:/app/lib/middleware.json \
+	-v $(pwd)/lib/redactions.js:/app/lib/redactions.js \
+	-v $(pwd)/lib/complex_resources.js:/app/lib/complex_resources.js \
+	-v $(pwd)/lib/permissions.json:/app/lib/permissions.json \
 	-v $(pwd)/migrations:/app/migrations \
 	--network mynetwork \
 	--env-file ./env \
@@ -214,21 +215,22 @@ You can take this output and use it to produce fantastic static HTML docs with [
 # <a id="docker_image"></a>Docker Image Publishing
 
 The steps below are not unique to this project -- but I often have to lookup the steps -- so I'll document them here for convenience.
+
 ```sh
 # build docker container
 docker build -t sudowing/service-engine:develop -f .Dockerfile .
-
-# tag & push master
-docker tag sudowing/service-engine:develop sudowing/service-engine:master
-docker push sudowing/service-engine:master
 
 # tag & push latest
 docker tag sudowing/service-engine:develop sudowing/service-engine:latest
 docker push sudowing/service-engine:latest
 
-# tag & push v0.0.0
-docker tag sudowing/service-engine:develop sudowing/service-engine:v0.0.0
-docker push sudowing/service-engine:v0.0.0
+# tag & push v1.3.0
+docker tag sudowing/service-engine:develop sudowing/service-engine:1.3.0
+docker tag sudowing/service-engine:develop sudowing/service-engine:1.3
+docker tag sudowing/service-engine:develop sudowing/service-engine:1
+docker push sudowing/service-engine:1.3.0
+docker push sudowing/service-engine:1.3
+docker push sudowing/service-engine:1
 ```
 
 # <a id="versioning"></a>Versioning
