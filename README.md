@@ -35,10 +35,10 @@ docker network create mynetwork
 docker run \
 	--rm -it \
 	-v $(pwd)/lib/metadata.json:/app/lib/metadata.json \
-	-v $(pwd)/lib/middleware.json:/app/lib/middleware.json \
+	-v $(pwd)/lib/permissions.js:/app/lib/permissions.js \
+	-v $(pwd)/lib/middleware.js:/app/lib/middleware.js \
 	-v $(pwd)/lib/redactions.js:/app/lib/redactions.js \
 	-v $(pwd)/lib/complex_resources.js:/app/lib/complex_resources.js \
-	-v $(pwd)/lib/permissions.json:/app/lib/permissions.json \
 	-v $(pwd)/migrations:/app/migrations \
 	--network mynetwork \
 	--env-file ./env \
