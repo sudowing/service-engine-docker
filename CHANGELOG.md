@@ -6,6 +6,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.3.0] - 2020-12-06
+### Added
+- Support for redacted fields
+- Bumped NPM package for service-engine (patching premissions & seperator bugs)
+
 ## [1.2.0] - 2020-12-04
 ### Added
 - Bumped NPM package for service-engine
@@ -23,9 +28,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Initial Release
 
-[Unreleased]: https://github.com/sudowing/service-engine-docker/compare/HEAD...v1.2.0
+[Unreleased]: https://github.com/sudowing/service-engine-docker/compare/HEAD...v1.3.0
+[1.3.0]: https://github.com/sudowing/service-engine-docker/compare/v1.2.0...v1.3.0
 [1.2.0]: https://github.com/sudowing/service-engine-docker/compare/v1.1.1...v1.2.0
 [1.1.1]: https://github.com/sudowing/service-engine-docker/compare/v1.1.0...v1.1.1
 [1.1.0]: https://github.com/sudowing/service-engine-docker/compare/v1.0.0...v1.1.0
 [1.0.0]: https://github.com/sudowing/service-engine-docker/releases/tag/v1.0.0
-
