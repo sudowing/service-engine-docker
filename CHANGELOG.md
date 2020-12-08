@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.4.0] - 2020-12-07
+### Patched
+- Bumped NPM package for service-engine (adding psql partition support)
+
 ## [1.3.1] - 2020-12-06
 ### Patched
 - Bumped NPM package for service-engine (patching `metadata.appShortName` bug)
@@ -32,7 +36,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Initial Release
 
-[Unreleased]: https://github.com/sudowing/service-engine-docker/compare/HEAD...v1.3.1
+[Unreleased]: https://github.com/sudowing/service-engine-docker/compare/HEAD...v1.4.0
+[1.4.0]: https://github.com/sudowing/service-engine-docker/compare/v1.3.1...v1.4.0
 [1.3.1]: https://github.com/sudowing/service-engine-docker/compare/v1.3.0...v1.3.1
 [1.3.0]: https://github.com/sudowing/service-engine-docker/compare/v1.3.0...v1.3.0
 [1.2.0]: https://github.com/sudowing/service-engine-docker/compare/v1.1.1...v1.2.0
