@@ -44,7 +44,7 @@ docker run --rm -d \
 	-p 8080:8080 \
 	-p 50012:50012 \
 	--name myservice \
-	sudowing/service-engine:develop
+	sudowing/service-engine:latest
 ```
 
 The service should now be available:
@@ -223,12 +223,12 @@ docker build -t sudowing/service-engine:develop -f .Dockerfile .
 docker tag sudowing/service-engine:develop sudowing/service-engine:latest
 docker push sudowing/service-engine:latest
 
-# tag & push v1.3.0
-docker tag sudowing/service-engine:develop sudowing/service-engine:1.3.0
-docker tag sudowing/service-engine:develop sudowing/service-engine:1.3
+# tag & push v1.6.0
+docker tag sudowing/service-engine:develop sudowing/service-engine:1.6.0
+docker tag sudowing/service-engine:develop sudowing/service-engine:1.6
 docker tag sudowing/service-engine:develop sudowing/service-engine:1
-docker push sudowing/service-engine:1.3.0
-docker push sudowing/service-engine:1.3
+docker push sudowing/service-engine:1.6.0
+docker push sudowing/service-engine:1.6
 docker push sudowing/service-engine:1
 ```
 
