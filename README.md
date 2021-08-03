@@ -32,8 +32,7 @@ set secrets & metadata
 docker network create mynetwork
 
 # run app via docker, optionally mounting custom files
-docker run \
-	--rm -it \
+docker run --rm -d \
 	-v $(pwd)/lib/metadata.json:/app/lib/metadata.json \
 	-v $(pwd)/lib/permissions.js:/app/lib/permissions.js \
 	-v $(pwd)/lib/middleware.js:/app/lib/middleware.js \
@@ -41,16 +40,16 @@ docker run \
 	-v $(pwd)/lib/complex_resources.js:/app/lib/complex_resources.js \
 	-v $(pwd)/migrations:/app/migrations \
 	--network mynetwork \
-	--env-file ./env \
+	--env-file .env \
 	-p 8080:8080 \
 	-p 50012:50012 \
 	--name myservice \
-	sudowing/service-engine:master
+	sudowing/service-engine:latest
 ```
 
 The service should now be available:
  - http://localhost:8080/openapi
- - http://localhost:8080/service-engine-app/graphql/
+ - http://localhost:8080/some-app-service/graphql/
 
 ##### **NOTES:**
 - **GraphQL Playground:** To access the Web UI, set `NODE_ENV=production`.
@@ -224,12 +223,12 @@ docker build -t sudowing/service-engine:develop -f .Dockerfile .
 docker tag sudowing/service-engine:develop sudowing/service-engine:latest
 docker push sudowing/service-engine:latest
 
-# tag & push v1.3.0
-docker tag sudowing/service-engine:develop sudowing/service-engine:1.3.0
-docker tag sudowing/service-engine:develop sudowing/service-engine:1.3
+# tag & push v1.6.0
+docker tag sudowing/service-engine:develop sudowing/service-engine:1.6.0
+docker tag sudowing/service-engine:develop sudowing/service-engine:1.6
 docker tag sudowing/service-engine:develop sudowing/service-engine:1
-docker push sudowing/service-engine:1.3.0
-docker push sudowing/service-engine:1.3
+docker push sudowing/service-engine:1.6.0
+docker push sudowing/service-engine:1.6
 docker push sudowing/service-engine:1
 ```
 
