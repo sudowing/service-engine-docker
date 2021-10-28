@@ -9,6 +9,7 @@ Currently it only supports postgres, mysql and sqlite3. Support is planned for t
 * [Table of Contents](#table-of-contents)
 * [Run via Docker](#run_via_docker)
 * [Run via Node](#run_via_node)
+	* [Oracle Development Notes](#run_via_node-oracle_development)
 * [OpenAPI UI](#open_api_ui)
 * [API Documentation](#api_documentation)
 * [Schema Migrations](#schema_migrations)
@@ -68,6 +69,29 @@ npm run start
 The service should now be available:
  - http://localhost:8080/openapi
  - http://localhost:8080/service-engine-app/graphql/
+
+
+## <a id="run_via_node-oracle_development"></a>Oracle Development Notes
+
+Oracle Drivers are not bundled and must be downloaded and setup locally. The following steps should help you get started.
+
+```sh
+# mkdir to hold driver
+mkdir local
+
+# download basic insta-client
+curl https://download.oracle.com/otn_software/linux/instantclient/1912000/instantclient-basic-linux.x64-19.12.0.0.0dbru.zip \
+    --output $(pwd)/local/instantclient-basic-linux.x64-19.12.0.0.0dbru.zip
+
+# uncompress downloaded files
+unzip $(pwd)/local/instantclient-basic-linux.x64-19.12.0.0.0dbru.zip \
+    -d $(pwd)/local
+
+# set ENV VAR to point at local driver
+export LD_LIBRARY_PATH=$(pwd)/local/instantclient_19_12
+```
+
+#### **NOTE:** When setting `DB_HOST` in `.env`, use IP instead of localhost if running Oracle locally or by container.
 
 # <a id="open_api_ui"></a>OpenAPI UI
 ```sh
