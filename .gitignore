@@ -21,3 +21,7 @@ node_modules/
 .DS_Store
 
 schema.error.*
+
+# local directory for holding Oracle Instant Client
+local
+

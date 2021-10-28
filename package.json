@@ -35,8 +35,9 @@
     "dotenv": "^8.2.0",
     "knex": "^0.95.9",
     "mysql2": "^2.2.5",
+    "oracledb": "^5.2.0",
     "pg": "^8.4.2",
-    "service-engine": "^1.7.0",
+    "service-engine": "^1.8.0",
     "sqlite3": "^5.0.0",
     "tedious": "^11.4.0",
     "widdershins": "^4.0.1"
