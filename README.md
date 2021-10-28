@@ -70,6 +70,8 @@ The service should now be available:
  - http://localhost:8080/openapi
  - http://localhost:8080/service-engine-app/graphql/
 
+#### **NOTE:** When setting `DB_HOST` in `.env`, use IP instead of localhost if running Oracle locally or by container.
+
 
 ## <a id="run_via_node-oracle_development"></a>Oracle Development Notes
 
@@ -90,8 +92,6 @@ unzip $(pwd)/local/instantclient-basic-linux.x64-19.12.0.0.0dbru.zip \
 # set ENV VAR to point at local driver
 export LD_LIBRARY_PATH=$(pwd)/local/instantclient_19_12
 ```
-
-#### **NOTE:** When setting `DB_HOST` in `.env`, use IP instead of localhost if running Oracle locally or by container.
 
 # <a id="open_api_ui"></a>OpenAPI UI
 ```sh
