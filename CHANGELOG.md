@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.7.0] - 2021-10-30
+### Added
+- Support for Oracle
+
 ## [1.6.0] - 2021-07-02
 ### Added
 - Support for MSSQL (sql-server)
@@ -47,7 +51,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Initial Release
 
-[Unreleased]: https://github.com/sudowing/service-engine-docker/compare/HEAD...v1.6.0
+[Unreleased]: https://github.com/sudowing/service-engine-docker/compare/HEAD...v1.7.0
+[1.7.0]: https://github.com/sudowing/service-engine-docker/compare/v1.6.0...v1.7.0
 [1.6.0]: https://github.com/sudowing/service-engine-docker/compare/v1.5.0...v1.6.0
 [1.5.0]: https://github.com/sudowing/service-engine-docker/compare/v1.4.0...v1.5.0
 [1.4.0]: https://github.com/sudowing/service-engine-docker/compare/v1.3.1...v1.4.0
