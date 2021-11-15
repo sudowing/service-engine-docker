@@ -37,7 +37,7 @@
     "mysql2": "^2.2.5",
     "oracledb": "^5.2.0",
     "pg": "^8.4.2",
-    "service-engine": "^1.8.0",
+    "service-engine": "^1.9.1",
     "sqlite3": "^5.0.0",
     "tedious": "^11.4.0",
     "widdershins": "^4.0.1"
