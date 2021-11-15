@@ -322,17 +322,3 @@ docker push sudowing/service-engine:1
 # <a id="license"></a>License
 
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
-
-
-
-
-
-
-
-ORACLE NOTES
-
-Client 19 will not run on Oracle Linux 6.
-
-If there is no other Oracle software on the machine that will be impacted, then permanently add Instant Client to the run-time link path. For example, if the Basic package unzipped to /opt/oracle/instantclient_19_11, then run the following using sudo or as the root user:
-
-export LD_LIBRARY_PATH=$(pwd)/local/instantclient_19_12
