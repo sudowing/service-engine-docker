@@ -17,6 +17,7 @@ Currently it only supports postgres, mysql and sqlite3. Support is planned for t
 	* [Disable Migrations on Startup](#schema_migrations-disable-on-startup)
 	* [Modular Schema Migration Scripts](#schema_migrations-modular)
 	* [SQL Style Guide](#schema_migrations-styleguide)
+* [Oracle Development](#oracle_development)
 * [Static HTML Documentation](#static_html)
     * [Generate shin markdown](#generate_shin)
     * [Disable Migrations](#disable_migrations)
@@ -219,6 +220,64 @@ The two `NPM` commands above will generate the files diagrammed with the tree be
 
 A SQL styleguide is included within the migrations directory. It is a simple markdown file, which you should modify to fit your needs. I forked the guide from [GitLab Handbook](https://about.gitlab.com/handbook/business-ops/data-team/platform/sql-style-guide/) which is a fantastic resources for organizational standards.
 
+# <a id="oracle_development"></a>Oracle Development
+
+In order to use Oracle, you must download `instantclient` and update your ENV to point at the drivers -- as `knex.js` will leverage this ENV Variable. Follow the steps below to accomplish this.
+
+## <a id="oracle_development-setup"></a>Oracle Instantclient Setup
+
+```sh
+# download basic instantclient-basic
+curl https://download.oracle.com/otn_software/linux/instantclient/1913000/instantclient-basic-linux.x64-19.13.0.0.0dbru.zip \
+    --output $(pwd)/lcl/instantclient-basic-linux.x64-19.13.0.0.0dbru.zip
+
+# uncompress downloaded files
+unzip $(pwd)/lcl/instantclient-basic-linux.x64-19.13.0.0.0dbru \
+    -d $(pwd)/lcl
+
+# tree of contents of download artifacts
+local/
+├── instantclient_19_12
+│   ├── adrci
+│   ├── BASIC_LICENSE
+│   ├── BASIC_README
+│   ├── genezi
+│   ├── libclntshcore.so.19.1
+│   ├── libclntsh.so -> libclntsh.so.19.1
+│   ├── libclntsh.so.10.1 -> libclntsh.so.19.1
+│   ├── libclntsh.so.11.1 -> libclntsh.so.19.1
+│   ├── libclntsh.so.12.1 -> libclntsh.so.19.1
+│   ├── libclntsh.so.18.1 -> libclntsh.so.19.1
+│   ├── libclntsh.so.19.1
+│   ├── libipc1.so
+│   ├── libmql1.so
+│   ├── libnnz19.so
+│   ├── libocci.so -> libocci.so.19.1
+│   ├── libocci.so.10.1 -> libocci.so.19.1
+│   ├── libocci.so.11.1 -> libocci.so.19.1
+│   ├── libocci.so.12.1 -> libocci.so.19.1
+│   ├── libocci.so.18.1 -> libocci.so.19.1
+│   ├── libocci.so.19.1
+│   ├── libociei.so
+│   ├── libocijdbc19.so
+│   ├── liboramysql19.so
+│   ├── network
+│   │   └── admin
+│   │       └── README
+│   ├── ojdbc8.jar
+│   ├── ucp.jar
+│   ├── uidrvci
+│   └── xstreams.jar
+└── instantclient-basic-linux.x64-19.12.0.0.0dbru.zip
+
+3 directories, 29 files
+
+# set ENV VAR for knex
+export LD_LIBRARY_PATH=$(pwd)/local/instantclient_19_13
+```
+
+#### NOTE: MINOR VERSION MAY BE DIFFERENT. I've seen 19_12 & 19_13 in the couple weeks I developed. Just change the path names and the above should work.
+
 # <a id="static_html"></a>Static HTML Documentation
 
 This project includes support for generating the markdown consumed by [Shin Docs](https://github.com/Mermade/shins) needed to produce static html documents. If you haven't seen that project before, it's worth a look.
@@ -263,3 +322,17 @@ docker push sudowing/service-engine:1
 # <a id="license"></a>License
 
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+
+
+
+
+
+
+
+ORACLE NOTES
+
+Client 19 will not run on Oracle Linux 6.
+
+If there is no other Oracle software on the machine that will be impacted, then permanently add Instant Client to the run-time link path. For example, if the Basic package unzipped to /opt/oracle/instantclient_19_11, then run the following using sudo or as the root user:
+
+export LD_LIBRARY_PATH=$(pwd)/local/instantclient_19_12
