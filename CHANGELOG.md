@@ -6,6 +6,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.9.0] - 2021-11-14
+### Added
+- Distinct support via `query.context`.
+- Support for Oracle. not yet supported `returning` data from SML for Oracle. Cannot get knex.js to build functional query. Will revisit at later date.
+
+## [1.8.0] - 2021-10-28
+### Note
+    skipping this to sync tags between NPM package & Docker image.
+
 ## [1.7.0] - 2021-10-30
 ### Added
 - Support for Oracle
@@ -51,7 +60,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Initial Release
 
-[Unreleased]: https://github.com/sudowing/service-engine-docker/compare/HEAD...v1.7.0
+[Unreleased]: https://github.com/sudowing/service-engine-docker/compare/v1.9.0...HEAD
+[1.9.0]: https://github.com/sudowing/service-engine-docker/compare/v1.8.0...v1.9.0
+[1.8.0]: https://github.com/sudowing/service-engine-docker/compare/v1.7.0...v1.8.0
 [1.7.0]: https://github.com/sudowing/service-engine-docker/compare/v1.6.0...v1.7.0
 [1.6.0]: https://github.com/sudowing/service-engine-docker/compare/v1.5.0...v1.6.0
 [1.5.0]: https://github.com/sudowing/service-engine-docker/compare/v1.4.0...v1.5.0
