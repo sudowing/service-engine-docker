@@ -33,7 +33,7 @@
   "homepage": "https://github.com/sudowing/service-engine-docker#readme",
   "dependencies": {
     "dotenv": "^8.2.0",
-    "knex": "^0.95.9",
+    "knex": "^2.4.0",
     "mysql2": "^2.2.5",
     "oracledb": "^5.2.0",
     "pg": "^8.4.2",
